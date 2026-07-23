@@ -74,6 +74,11 @@ if(!empty($_POST['cp101_vin'])){
 
 $vehicle = $db->find_vehicle($vin);
 
+echo '<pre>';
+var_dump($vehicle);
+echo '</pre>';
+die();
+
 if (!$vehicle) {
 
     // Fall back to NHTSA
@@ -143,8 +148,8 @@ $search = trim($make . ' ' . $model);
  's'=>$search
  ];
  $q=new WP_Query($args);
- if (!$q->have_posts() && !empty($make)) {
-    $args['s'] = $make;
+ if(!$q->have_posts() && !empty($vehicle['Make'])){
+   $args['s']=$vehicle['Make'];
    $q=new WP_Query($args);
  }
  while($q->have_posts()){ $q->the_post(); global $product;
