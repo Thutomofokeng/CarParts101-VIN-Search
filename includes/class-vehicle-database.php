@@ -85,9 +85,15 @@ return $data;
     $modelCode = strtoupper(substr($vin, 3, 4));
 
     if (!array_key_exists($modelCode, $models)) {
-        error_log("CP101: {$modelCode} not found in {$manufacturer}.json");
-        return null;
-    }
+    die(
+        '<pre>' .
+        'Manufacturer: ' . $manufacturer . PHP_EOL .
+        'Model Code: ' . $modelCode . PHP_EOL .
+        'JSON File: ' . plugin_dir_path(__FILE__) . "Databases/models/{$manufacturer}.json" . PHP_EOL .
+        'Keys Loaded: ' . count($models) .
+        '</pre>'
+    );
+}
 
     $model = $models[$modelCode];
 
