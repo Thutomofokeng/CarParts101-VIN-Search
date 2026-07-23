@@ -11,101 +11,118 @@ class CP101_Vehicle_Database
 
     public function __construct()
     {
-        // Load known VIN database
-        $vehicle_file = plugin_dir_path(__FILE__) . 'Databases/vehicles.json';
+        // Load VIN database
+        $vehicleFile = plugin_dir_path(__FILE__) . 'Databases/vehicles.json';
 
-        if (file_exists($vehicle_file)) {
-            $this->vehicles = json_decode(file_get_contents($vehicle_file), true) ?: [];
+        if (file_exists($vehicleFile)) {
+            $this->vehicles = json_decode(file_get_contents($vehicleFile), true) ?: [];
         }
 
-        // Load manufacturer database
-        $manufacturer_file = plugin_dir_path(__FILE__) . 'Databases/manufacturers.json';
+        // Load WMI database
+        $wmiFile = plugin_dir_path(__FILE__) . 'wmi.php';
 
-        if (file_exists($manufacturer_file)) {
-            $this->manufacturers = json_decode(file_get_contents($manufacturer_file), true) ?: [];
+        if (file_exists($wmiFile)) {
+            $this->manufacturers = require $wmiFile;
+        } else {
+            error_log('CP101: wmi.php not found.');
         }
     }
 
     /**
-     * Load a manufacturer-specific JSON database.
+     * Load manufacturer model database
      */
-    private function load_database($folder, $manufacturer)
+    private function load_database($manufacturer)
     {
         $manufacturer = strtolower($manufacturer);
 
         $file = plugin_dir_path(__FILE__) .
-            "Databases/{$folder}/{$manufacturer}.json";
+            "Databases/models/{$manufacturer}.json";
 
         if (!file_exists($file)) {
+            error_log("CP101: Missing model database {$file}");
             return [];
         }
 
         $json = file_get_contents($file);
         $data = json_decode($json, true);
 
-    if (json_last_error() !== JSON_ERROR_NONE) {
-         error_log('CP101 JSON Error: ' . json_last_error_msg());
-        return [];
-}
+        if (json_last_error() !== JSON_ERROR_NONE) {
+            error_log('CP101 JSON Error: ' . json_last_error_msg());
+            return [];
+        }
 
-return $data;
+        return $data;
     }
 
     public function find_vehicle($vin)
-{
-    $vin = strtoupper(trim($vin));
+    {
+        $vin = strtoupper(trim($vin));
 
-    if (strlen($vin) !== 17) {
-        return null;
-    }
+        if (strlen($vin) !== 17) {
+            return null;
+        }
 
-    // Exact VIN lookup
-    if (isset($this->vehicles[$vin])) {
-        return $this->vehicles[$vin];
-    }
+        /*
+         * Exact VIN database
+         */
+        if (isset($this->vehicles[$vin])) {
+            return $this->vehicles[$vin];
+        }
 
-    // Manufacturer lookup
-    $wmi = substr($vin, 0, 3);
+        /*
+         * Manufacturer lookup
+         */
+        $wmi = substr($vin, 0, 3);
 
-    if (!isset($this->manufacturers[$wmi])) {
-        return null;
-    }
+        if (!isset($this->manufacturers[$wmi])) {
+            error_log("CP101: Unknown WMI {$wmi}");
+            return null;
+        }
 
-    $manufacturer = strtolower($this->manufacturers[$wmi]);
+        $manufacturer = strtolower($this->manufacturers[$wmi]);
 
-    // Load manufacturer database
-    $models = $this->load_database('models', $manufacturer);
+        /*
+         * Load manufacturer database
+         */
+        $models = $this->load_database($manufacturer);
 
-    if (empty($models)) {
-        error_log("CP101: No model database loaded for {$manufacturer}");
-        return null;
-    }
+        if (empty($models)) {
+            return null;
+        }
 
-    // BMW/MINI type code
-    $modelCode = strtoupper(substr($vin, 3, 4));
+        /*
+         * VIN model code
+         */
+        $modelCode = strtoupper(substr($vin, 3, 4));
 
-    if (!array_key_exists($modelCode, $models)) {
-    die(
-        '<pre>' .
-        'Manufacturer: ' . $manufacturer . PHP_EOL .
-        'Model Code: ' . $modelCode . PHP_EOL .
-        'JSON File: ' . plugin_dir_path(__FILE__) . "Databases/models/{$manufacturer}.json" . PHP_EOL .
-        'Keys Loaded: ' . count($models) .
-        '</pre>'
-    );
-}
+        if (!isset($models[$modelCode])) {
 
-    $model = $models[$modelCode];
+            echo '<pre>';
+            echo "Manufacturer : {$manufacturer}\n";
+            echo "VIN          : {$vin}\n";
+            echo "WMI          : {$wmi}\n";
+            echo "Model Code   : {$modelCode}\n";
+            echo "Database     : Databases/models/{$manufacturer}.json\n";
+            echo "Available Keys:\n";
+            print_r(array_keys($models));
+            echo '</pre>';
 
-    return [
-        'make'   => strtoupper($manufacturer),
-        'series' => $model['series'] ?? '',
-        'model'  => $model['model'] ?? '',
-        'body'   => $model['body'] ?? '',
-        'drive'  => $model['drive'] ?? '',
-        'year'   => $model['production'] ?? '',
-        'plant'  => $model['plant'] ?? '',
-        'engine' => $model['engine'] ?? ''
-    ];
+            return null;
+        }
+
+        $model = $models[$modelCode];
+
+        return [
+
+            'make'   => ucfirst($manufacturer),
+            'series' => $model['series'] ?? '',
+            'model'  => $model['model'] ?? '',
+            'body'   => $model['body'] ?? '',
+            'drive'  => $model['drive'] ?? '',
+            'year'   => $model['production'] ?? '',
+            'plant'  => $model['plant'] ?? '',
+            'engine' => $model['engine'] ?? ''
+
+        ];
     }
 }
