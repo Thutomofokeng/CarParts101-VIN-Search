@@ -1,80 +1,118 @@
-{
-    "WMW": "MINI",
-    "WBA": "BMW",
-    "WBS": "BMW M",
-    "WBY": "BMW i",
+<?php
 
-    "WAU": "Audi",
-    "TRU": "Audi",
+return [
 
-    "WVW": "Volkswagen",
-    "WV1": "Volkswagen Commercial",
-    "WVG": "Volkswagen",
+    // MINI / BMW
+    'WMW' => 'MINI',
+    'WBA' => 'BMW',
+    'WBS' => 'BMW M',
+    'WBY' => 'BMW i',
+    '5UX' => 'BMW',
+    '5YM' => 'BMW M',
 
-    "AA9": "Volkswagen South Africa",
+    // Audi
+    'WAU' => 'Audi',
+    'TRU' => 'Audi',
 
-    "WDB": "Mercedes-Benz",
-    "WDC": "Mercedes-Benz",
-    "WDD": "Mercedes-Benz",
-    "W1K": "Mercedes-Benz",
+    // Volkswagen
+    'WVW' => 'Volkswagen',
+    'WV1' => 'Volkswagen Commercial',
+    'WVG' => 'Volkswagen',
+    'AA9' => 'Volkswagen South Africa',
+    '3VW' => 'Volkswagen',
 
-    "SAL": "Land Rover",
-    "SAJ": "Jaguar",
+    // Mercedes-Benz
+    'WDB' => 'Mercedes-Benz',
+    'WDC' => 'Mercedes-Benz',
+    'WDD' => 'Mercedes-Benz',
+    'W1K' => 'Mercedes-Benz',
 
-    "JTD": "Toyota",
-    "JT3": "Toyota",
-    "JTB": "Toyota",
-    "AHT": "Toyota South Africa",
+    // Jaguar / Land Rover
+    'SAL' => 'Land Rover',
+    'SAJ' => 'Jaguar',
 
-    "JTH": "Lexus",
+    // Toyota
+    'JTD' => 'Toyota',
+    'JT3' => 'Toyota',
+    'JTB' => 'Toyota',
+    'AHT' => 'Toyota South Africa',
+    '2T1' => 'Toyota',
+    '5TD' => 'Toyota',
 
-    "JHM": "Honda",
+    // Honda
+    'JHM' => 'Honda',
+    '1HG' => 'Honda',
+    '2HG' => 'Honda',
 
-    "JMZ": "Mazda",
+    // Nissan
+    'JN1' => 'Nissan',
+    'JN8' => 'Nissan',
+    '1N4' => 'Nissan',
 
-    "JSA": "Suzuki",
+    // Mitsubishi
+    'JMB' => 'Mitsubishi',
+    'MMC' => 'Mitsubishi',
+    'MMB' => 'Mitsubishi',
 
-    "JMB": "Mitsubishi",
+    // Subaru
+    'JF1' => 'Subaru',
+    'JF2' => 'Subaru',
 
-    "JN1": "Nissan",
-    "JN8": "Nissan",
-    "MNT": "Nissan South Africa",
+    // Suzuki
+    'JSA' => 'Suzuki',
+    'JS2' => 'Suzuki',
 
-    "KMH": "Hyundai",
+    // Mazda
+    'JMZ' => 'Mazda',
 
-    "KNA": "Kia",
+    // Kia
+    'KNA' => 'Kia',
+    'KNA' => 'Kia',
 
-    "VF1": "Renault",
+    // Hyundai
+    'KMH' => 'Hyundai',
+    'KMF' => 'Hyundai',
 
-    "VF3": "Peugeot",
+    // Lexus
+    'JTH' => 'Lexus',
 
-    "VF7": "Citroën",
+    // Porsche
+    'WP0' => 'Porsche',
 
-    "ZFA": "Fiat",
+    // Renault
+    'VF1' => 'Renault',
 
-    "ZAR": "Alfa Romeo",
+    // Peugeot
+    'VF3' => 'Peugeot',
 
-    "MA1": "Mahindra",
+    // Citroen
+    'VF7' => 'Citroen',
 
-    "MAT": "Tata",
+    // Volvo
+    'YV1' => 'Volvo',
 
-    "MPA": "Isuzu",
+    // Opel
+    'W0L' => 'Opel',
 
-    "LGW": "GWM",
+    // Mahindra
+    'MA1' => 'Mahindra',
 
-    "LHB": "Haval",
+    // Tata
+    'MAT' => 'Tata',
 
-    "LVV": "Chery",
+    // Isuzu
+    'MPA' => 'Isuzu',
 
-    "LVT": "Omoda",
+    // Chinese manufacturers
+    'LVV' => 'Chery',
+    'LGB' => 'Great Wall',
+    'LGW' => 'GWM',
+    'LHB' => 'Haval',
+    'LSJ' => 'MG',
+    'LNB' => 'BAIC',
+    'LVA' => 'Foton',
+    'LFP' => 'FAW',
+    'LSV' => 'SAIC Volkswagen',
+    'LBE' => 'Beijing Benz',
 
-    "LTV": "Jaecoo",
-
-    "LC0": "BYD",
-
-    "LSJ": "MG",
-
-    "LNB": "BAIC",
-
-    "LVA": "Foton"
-}
+];
