@@ -40,48 +40,66 @@ class CP101_Vehicle_Database
             return [];
         }
 
-        return json_decode(file_get_contents($file), true) ?: [];
+        $json = file_get_contents($file);
+        $data = json_decode($json, true);
+
+    if (json_last_error() !== JSON_ERROR_NONE) {
+         error_log('CP101 JSON Error: ' . json_last_error_msg());
+        return [];
+}
+
+return $data;
     }
 
     public function find_vehicle($vin)
-    {
-        $vin = strtoupper(trim($vin));
+{
+    $vin = strtoupper(trim($vin));
 
-        if (strlen($vin) !== 17) {
-            return null;
-        }
+    if (strlen($vin) !== 17) {
+        return null;
+    }
 
-        // 1. Exact VIN lookup
-        if (isset($this->vehicles[$vin])) {
-            return $this->vehicles[$vin];
-        }
+    // Exact VIN lookup
+    if (isset($this->vehicles[$vin])) {
+        return $this->vehicles[$vin];
+    }
 
-        // 2. Manufacturer lookup
-        $wmi = substr($vin, 0, 3);
+    // Manufacturer lookup
+    $wmi = substr($vin, 0, 3);
 
-        if (!isset($this->manufacturers[$wmi])) {
-            return null;
-        }
+    if (!isset($this->manufacturers[$wmi])) {
+        return null;
+    }
 
-        $manufacturer = $this->manufacturers[$wmi];
+    $manufacturer = strtolower($this->manufacturers[$wmi]);
 
-        // 3. Load manufacturer-specific model database
-        $models = $this->load_database('models', $manufacturer);
+    // Load manufacturer database
+    $models = $this->load_database('models', $manufacturer);
 
-        // MINI/BMW style model code
-        $modelCode = substr($vin, 3, 4);
+    if (empty($models)) {
+        error_log("CP101: No model database loaded for {$manufacturer}");
+        return null;
+    }
 
-        $model = $models[$modelCode] ?? [];
+    // BMW/MINI type code
+    $modelCode = strtoupper(substr($vin, 3, 4));
 
-        return [
-            'make'   => $manufacturer,
-            'series' => $model['series'] ?? 'Unknown',
-            'model'  => $model['model'] ?? 'Unknown',
-            'body'   => $model['body'] ?? 'Unknown',
-            'drive'  => $model['drive'] ?? 'Unknown',
-            'year'   => 'Unknown',
-            'plant'  => 'Unknown',
-            'engine' => 'Unknown'
-        ];
+    if (!array_key_exists($modelCode, $models)) {
+        error_log("CP101: {$modelCode} not found in {$manufacturer}.json");
+        return null;
+    }
+
+    $model = $models[$modelCode];
+
+    return [
+        'make'   => strtoupper($manufacturer),
+        'series' => $model['series'] ?? '',
+        'model'  => $model['model'] ?? '',
+        'body'   => $model['body'] ?? '',
+        'drive'  => $model['drive'] ?? '',
+        'year'   => $model['production'] ?? '',
+        'plant'  => $model['plant'] ?? '',
+        'engine' => $model['engine'] ?? ''
+    ];
     }
 }
