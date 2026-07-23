@@ -74,11 +74,6 @@ if(!empty($_POST['cp101_vin'])){
 
 $vehicle = $db->find_vehicle($vin);
 
-echo '<pre>';
-var_dump($vehicle);
-echo '</pre>';
-die();
-
 if (!$vehicle) {
 
     // Fall back to NHTSA
