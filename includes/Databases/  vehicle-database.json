@@ -1,0 +1,28 @@
+{
+    "WMWXM52040": {
+        "make": "MINI",
+        "model": "Cooper",
+        "year": "2012",
+        "engine": "1.6L Petrol",
+        "body": "Hatchback",
+        "drive": "FWD"
+    },
+
+    "WBA": {
+        "make": "BMW",
+        "model": "Unknown",
+        "year": "",
+        "engine": "",
+        "body": "",
+        "drive": ""
+    },
+
+    "JTD": {
+        "make": "Toyota",
+        "model": "Unknown",
+        "year": "",
+        "engine": "",
+        "body": "",
+        "drive": ""
+    }
+}

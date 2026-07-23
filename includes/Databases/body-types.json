@@ -1,0 +1,14 @@
+{
+    "HB":"Hatchback",
+    "SD":"Sedan",
+    "CP":"Coupe",
+    "CV":"Convertible",
+    "SW":"Station Wagon",
+    "SUV":"SUV",
+    "DC":"Double Cab",
+    "SC":"Single Cab",
+    "EC":"Extra Cab",
+    "MPV":"MPV",
+    "VAN":"Van",
+    "BUS":"Bus"
+}
