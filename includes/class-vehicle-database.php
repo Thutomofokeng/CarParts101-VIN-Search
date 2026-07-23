@@ -4,8 +4,8 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-class CP101_Vehicle_Database {
-
+class CP101_Vehicle_Database
+{
     private $vehicles = [];
     private $manufacturers = [];
     private $years = [];
@@ -13,8 +13,8 @@ class CP101_Vehicle_Database {
     private $engines = [];
     private $bodyTypes = [];
 
-    public function __construct() {
-
+    public function __construct()
+    {
         $this->vehicles      = $this->load_json('vehicles.json');
         $this->manufacturers = $this->load_json('manufacturers.json');
         $this->years         = $this->load_json('years.json');
@@ -46,48 +46,32 @@ class CP101_Vehicle_Database {
     {
         $vin = strtoupper(trim($vin));
 
-        if (strlen($vin) != 17) {
+        if (strlen($vin) !== 17) {
             return null;
         }
 
-        /*
-         * 1. Exact VIN lookup
-         */
+        // 1. Exact VIN lookup
         if (isset($this->vehicles[$vin])) {
             return $this->vehicles[$vin];
         }
 
-        /*
-         * 2. Decode standard VIN fields
-         */
+        // 2. Decode VIN using local databases
         $wmi       = substr($vin, 0, 3);
         $yearCode  = substr($vin, 9, 1);
         $plantCode = substr($vin, 10, 1);
 
-        /*
-         * NOTE:
-         * Engine/body positions differ by manufacturer.
-         * These can be refined later.
-         */
+        // These positions are manufacturer-specific and can be improved later.
         $engineCode = substr($vin, 4, 2);
         $bodyCode   = substr($vin, 3, 2);
 
         return [
-
-            'make' => $this->manufacturers[$wmi] ?? 'Unknown',
-
-            'model' => 'Unknown',
-
-            'year' => $this->years[$yearCode] ?? 'Unknown',
-
-            'plant' => $this->plants[$plantCode] ?? 'Unknown',
-
+            'make'   => $this->manufacturers[$wmi] ?? 'Unknown',
+            'model'  => 'Unknown',
+            'year'   => $this->years[$yearCode] ?? 'Unknown',
+            'plant'  => $this->plants[$plantCode] ?? 'Unknown',
             'engine' => $this->engines[$engineCode] ?? 'Unknown',
-
-            'body' => $this->bodyTypes[$bodyCode] ?? 'Unknown',
-
-            'drive' => ''
-
+            'body'   => $this->bodyTypes[$bodyCode] ?? 'Unknown',
+            'drive'  => ''
         ];
     }
 }
