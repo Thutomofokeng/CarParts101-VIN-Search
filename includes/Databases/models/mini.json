@@ -1,25 +1,4 @@
 {
-  "XM51": {
-    "series": "R50",
-    "model": "One",
-    "body": "3-door Hatchback",
-    "drive": "FWD",
-    "production": "2001-2006"
-  },
-  "XM52": {
-    "series": "R50",
-    "model": "Cooper",
-    "body": "3-door Hatchback",
-    "drive": "FWD",
-    "production": "2001-2006"
-  },
-  "XM53": {
-    "series": "R53",
-    "model": "Cooper S",
-    "body": "3-door Hatchback",
-    "drive": "FWD",
-    "production": "2002-2006"
-  },
   "XM54": {
     "series": "R50",
     "model": "One D",
@@ -145,6 +124,301 @@
     "body": "SUV Coupe",
     "drive": "ALL4",
     "production": "2012-2016"
+  },
+
+  "LN31": {
+    "series": "F54",
+    "model": "Cooper Clubman",
+    "body": "Estate",
+    "drive": "FWD",
+    "production": "2015-2021"
+  },
+
+  "LN32": {
+    "series": "F54",
+    "model": "Cooper Clubman",
+    "body": "Estate",
+    "drive": "FWD",
+    "production": "2015-2021"
+  },
+  "LN71": {
+    "series": "F54",
+    "model": "Cooper S Clubman",
+    "body": "Estate",
+    "drive": "FWD",
+    "production": "2015-2021"
+  },
+  "LN72": {
+    "series": "F54",
+    "model": "Cooper S Clubman",
+    "body": "Estate",
+    "drive": "FWD",
+    "production": "2015-2021"
+  },
+  "LU32": {
+    "series": "F54",
+    "model": "Cooper S Clubman ALL4",
+    "body": "Estate",
+    "drive": "ALL4",
+    "production": "2015-2021"
+  },
+
+  "XS51": {
+    "series": "F55",
+    "model": "Cooper",
+    "body": "5-door Hatchback",
+    "drive": "FWD",
+    "production": "2014-2021"
+  },
+
+  "XS52": {
+    "series": "F55",
+    "model": "Cooper",
+    "body": "5-door Hatchback",
+    "drive": "FWD",
+    "production": "2014-2021"
+  },
+
+  "XS53": {
+    "series": "F55",
+    "model": "Cooper",
+    "body": "5-door Hatchback",
+    "drive": "FWD",
+    "production": "2014-2021"
+  },
+
+  "XU11": {
+    "series": "F55",
+    "model": "Cooper",
+    "body": "5-door Hatchback",
+    "drive": "FWD",
+    "production": "2021-2024"
+  },
+
+  "XU13": {
+    "series": "F55",
+    "model": "Cooper",
+    "body": "5-door Hatchback",
+    "drive": "FWD",
+    "production": "2021-2024"
+  },
+
+  "XT31": {
+    "series": "F55",
+    "model": "Cooper D",
+    "body": "5-door Hatchback",
+    "drive": "FWD",
+    "production": "2014-2021"
+  },
+
+  "XT32": {
+    "series": "F55",
+    "model": "Cooper D",
+    "body": "5-door Hatchback",
+    "drive": "FWD",
+    "production": "2014-2021"
+  },
+
+  "XU31": {
+    "series": "F55",
+    "model": "Cooper S",
+    "body": "5-door Hatchback",
+    "drive": "FWD",
+    "production": "2020-2024"
+  },
+
+  "XS71": {
+    "series": "F55",
+    "model": "Cooper S",
+    "body": "5-door Hatchback",
+    "drive": "FWD",
+    "production": "2014-2020"
+  },
+  
+  "XN71": {
+    "series": "F56",
+    "model": "One",
+    "body": "3-door Hatchback",
+    "drive": "FWD",
+    "production": "2014-2021"
+  },
+
+  "XN72": {
+    "series": "F56",
+    "model": "One",
+    "body": "3-door Hatchback",
+    "drive": "FWD",
+    "production": "2014-2021"
+  },
+
+  "XN11": {
+    "series": "F56",
+    "model": "One D",
+    "body": "3-door Hatchback",
+    "drive": "FWD",
+    "production": "2014-2021"
+  },
+
+  "XN12": {
+    "series": "F56",
+    "model": "One D",
+    "body": "3-door Hatchback",
+    "drive": "FWD",
+    "production": "2014-2021"
+  },
+
+  "XP11": {
+    "series": "F56",
+    "model": "One First",
+    "body": "3-door Hatchback",
+    "drive": "FWD",
+    "production": "2014-2021"
+  },
+
+  "XP12": {
+    "series": "F56",
+    "model": "One First",
+    "body": "3-door Hatchback",
+    "drive": "FWD",
+    "production": "2014-2021"
+  },
+
+  "XM51": {
+    "series": "F56",
+    "model": "Cooper",
+    "body": "3-door Hatchback",
+    "drive": "FWD",
+    "production": "2014-2021"
+  },
+
+  "XM52": {
+    "series": "F56",
+    "model": "Cooper",
+    "body": "3-door Hatchback",
+    "drive": "FWD",
+    "production": "2014-2021"
+  },
+
+  "XM53": {
+    "series": "F56",
+    "model": "Cooper",
+    "body": "3-door Hatchback",
+    "drive": "FWD",
+    "production": "2014-2021"
+  },
+
+  "XP51": {
+    "series": "F56",
+    "model": "Cooper",
+    "body": "3-door Hatchback",
+    "drive": "FWD",
+    "production": "2018-2021"
+  },
+
+  "XP53": {
+    "series": "F56",
+    "model": "Cooper",
+    "body": "3-door Hatchback",
+    "drive": "FWD",
+    "production": "2018-2021"
+  },
+
+  "XN31": {
+    "series": "F56",
+    "model": "Cooper D",
+    "body": "3-door Hatchback",
+    "drive": "FWD",
+    "production": "2014-2021"
+  },
+
+  "XN32": {
+    "series": "F56",
+    "model": "Cooper D",
+    "body": "3-door Hatchback",
+    "drive": "FWD",
+    "production": "2014-2021"
+  },
+
+  "XM71": {
+    "series": "F56",
+    "model": "Cooper S",
+    "body": "3-door Hatchback",
+    "drive": "FWD",
+    "production": "2014-2021"
+  },
+
+  "XM72": {
+    "series": "F56",
+    "model": "Cooper S",
+    "body": "3-door Hatchback",
+    "drive": "FWD",
+    "production": "2014-2021"
+  },
+
+  "XM73": {
+    "series": "F56",
+    "model": "Cooper S",
+    "body": "3-door Hatchback",
+    "drive": "FWD",
+    "production": "2014-2021"
+  },
+
+  "XP71": {
+    "series": "F56",
+    "model": "Cooper S",
+    "body": "3-door Hatchback",
+    "drive": "FWD",
+    "production": "2018-2021"
+  },
+
+  "XP73": {
+    "series": "F56",
+    "model": "Cooper S",
+    "body": "3-door Hatchback",
+    "drive": "FWD",
+    "production": "2018-2021"
+  },
+
+  "XN91": {
+    "series": "F56",
+    "model": "Cooper SD",
+    "body": "3-door Hatchback",
+    "drive": "FWD",
+    "production": "2014-2021"
+  },
+
+  "XN92": {
+    "series": "F56",
+    "model": "Cooper SD",
+    "body": "3-door Hatchback",
+    "drive": "FWD",
+    "production": "2014-2021"
+  },
+
+  "XM91": {
+    "series": "F56",
+    "model": "John Cooper Works",
+    "body": "3-door Hatchback",
+    "drive": "FWD",
+    "production": "2015-2021"
+  },
+
+  "XM92": {
+    "series": "F56",
+    "model": "John Cooper Works",
+    "body": "3-door Hatchback",
+    "drive": "FWD",
+    "production": "2015-2021"
+  },
+
+  "XM93": {
+    "series": "F56",
+    "model": "John Cooper Works",
+    "body": "3-door Hatchback",
+    "drive": "FWD",
+    "production": "2015-2021"
   }
 }
+  
+  
 
