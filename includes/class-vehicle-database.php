@@ -8,70 +8,54 @@ class CP101_Vehicle_Database
 {
     private $vehicles = [];
     private $manufacturers = [];
-    private $years = [];
-    private $plants = [];
-    private $engines = [];
-    private $bodyTypes = [];
 
     public function __construct()
     {
-        $this->vehicles      = $this->load_json('vehicles.json');
-        $this->manufacturers = $this->load_json('manufacturers.json');
-        $this->years         = $this->load_json('years.json');
-        $this->plants        = $this->load_json('plants.json');
-        $this->engines       = $this->load_json('engines.json');
-        $this->bodyTypes     = $this->load_json('body-types.json');
-    }
+        // Load known VIN database
+        $vehicle_file = plugin_dir_path(__FILE__) . 'Databases/vehicles.json';
 
-    /**
-     * Load a JSON file from the Databases folder.
-     */
-    private function load_json($file)
-    {
-        $path = plugin_dir_path(__FILE__) . 'Databases/' . $file;
-
-        if (!file_exists($path)) {
-            return [];
+        if (file_exists($vehicle_file)) {
+            $this->vehicles = json_decode(file_get_contents($vehicle_file), true) ?: [];
         }
 
-        $json = json_decode(file_get_contents($path), true);
+        // Load manufacturer database
+        $manufacturer_file = plugin_dir_path(__FILE__) . 'Databases/manufacturers.json';
 
-        return is_array($json) ? $json : [];
+        if (file_exists($manufacturer_file)) {
+            $this->manufacturers = json_decode(file_get_contents($manufacturer_file), true) ?: [];
+        }
     }
 
-    /**
-     * Find a vehicle by VIN.
-     */
     public function find_vehicle($vin)
     {
         $vin = strtoupper(trim($vin));
 
+        // VIN must be 17 characters
         if (strlen($vin) !== 17) {
             return null;
         }
 
-        // 1. Exact VIN lookup
+        // Exact VIN match
         if (isset($this->vehicles[$vin])) {
             return $this->vehicles[$vin];
         }
 
-        // 2. Decode VIN using local databases
-        $wmi       = substr($vin, 0, 3);
-        $yearCode  = substr($vin, 9, 1);
-        $plantCode = substr($vin, 10, 1);
+        // Manufacturer lookup
+        $wmi = substr($vin, 0, 3);
 
-        // These positions are manufacturer-specific and can be improved later.
-        $engineCode = substr($vin, 4, 2);
-        $bodyCode   = substr($vin, 3, 2);
+        if (isset($this->manufacturers[$wmi])) {
+            return [
+                'make'   => $this->manufacturers[$wmi],
+                'model'  => 'Unknown',
+                'year'   => 'Unknown',
+                'plant'  => 'Unknown',
+                'engine' => 'Unknown',
+                'body'   => 'Unknown',
+                'drive'  => ''
+            ];
+        }
 
-        return [
-            'make'   => $this->manufacturers[$wmi] ?? 'Unknown',
-            'model'  => 'Unknown',
-            'year'   => $this->years[$yearCode] ?? 'Unknown',
-            'plant'  => $this->plants[$plantCode] ?? 'Unknown',
-            'engine' => $this->engines[$engineCode] ?? 'Unknown',
-            'body'   => $this->bodyTypes[$bodyCode] ?? 'Unknown',
-            'drive'  => ''
-        ];
+        // Nothing found locally
+        return null;
     }
 }

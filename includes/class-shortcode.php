@@ -133,15 +133,18 @@ if (!$vehicle) {
 }
 if(class_exists('WooCommerce')){
  echo '<h2>Compatible Parts</h2><div class="cp101-grid">';
- $search=trim(($vehicle['Make'] ?? '').' '.($vehicle['Model'] ?? ''));
+ $make  = $vehicle['Make'] ?? $vehicle['make'] ?? '';
+$model = $vehicle['Model'] ?? $vehicle['model'] ?? '';
+
+$search = trim($make . ' ' . $model);
  $args=[
  'post_type'=>'product',
  'posts_per_page'=>24,
  's'=>$search
  ];
  $q=new WP_Query($args);
- if(!$q->have_posts() && !empty($vehicle['Make'])){
-   $args['s']=$vehicle['Make'];
+ if (!$q->have_posts() && !empty($make)) {
+    $args['s'] = $make;
    $q=new WP_Query($args);
  }
  while($q->have_posts()){ $q->the_post(); global $product;
