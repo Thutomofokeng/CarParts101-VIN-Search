@@ -1,0 +1,150 @@
+{
+  "XM51": {
+    "series": "R50",
+    "model": "One",
+    "body": "3-door Hatchback",
+    "drive": "FWD",
+    "production": "2001-2006"
+  },
+  "XM52": {
+    "series": "R50",
+    "model": "Cooper",
+    "body": "3-door Hatchback",
+    "drive": "FWD",
+    "production": "2001-2006"
+  },
+  "XM53": {
+    "series": "R53",
+    "model": "Cooper S",
+    "body": "3-door Hatchback",
+    "drive": "FWD",
+    "production": "2002-2006"
+  },
+  "XM54": {
+    "series": "R50",
+    "model": "One D",
+    "body": "3-door Hatchback",
+    "drive": "FWD",
+    "production": "2003-2006"
+  },
+  "RF32": {
+    "series": "R52",
+    "model": "Cooper Convertible",
+    "body": "Convertible",
+    "drive": "FWD",
+    "production": "2004-2008"
+  },
+  "RF33": {
+    "series": "R52",
+    "model": "Cooper S Convertible",
+    "body": "Convertible",
+    "drive": "FWD",
+    "production": "2004-2008"
+  },
+  "MF31": {
+    "series": "R56",
+    "model": "One",
+    "body": "3-door Hatchback",
+    "drive": "FWD",
+    "production": "2006-2013"
+  },
+  "MF32": {
+    "series": "R56",
+    "model": "Cooper",
+    "body": "3-door Hatchback",
+    "drive": "FWD",
+    "production": "2006-2013"
+  },
+  "MF33": {
+    "series": "R56",
+    "model": "Cooper S",
+    "body": "3-door Hatchback",
+    "drive": "FWD",
+    "production": "2006-2013"
+  },
+  "MM31": {
+    "series": "R55",
+    "model": "Clubman",
+    "body": "Estate",
+    "drive": "FWD",
+    "production": "2007-2014"
+  },
+  "MM32": {
+    "series": "R55",
+    "model": "Cooper Clubman",
+    "body": "Estate",
+    "drive": "FWD",
+    "production": "2007-2014"
+  },
+  "MM33": {
+    "series": "R55",
+    "model": "Cooper S Clubman",
+    "body": "Estate",
+    "drive": "FWD",
+    "production": "2007-2014"
+  },
+  "SX31": {
+    "series": "R58",
+    "model": "Cooper Coupé",
+    "body": "Coupe",
+    "drive": "FWD",
+    "production": "2011-2015"
+  },
+  "SX32": {
+    "series": "R58",
+    "model": "Cooper S Coupé",
+    "body": "Coupe",
+    "drive": "FWD",
+    "production": "2011-2015"
+  },
+  "ZX31": {
+    "series": "R59",
+    "model": "Cooper Roadster",
+    "body": "Roadster",
+    "drive": "FWD",
+    "production": "2012-2015"
+  },
+  "ZX32": {
+    "series": "R59",
+    "model": "Cooper S Roadster",
+    "body": "Roadster",
+    "drive": "FWD",
+    "production": "2012-2015"
+  },
+  "XD31": {
+    "series": "R60",
+    "model": "Countryman",
+    "body": "SUV",
+    "drive": "FWD",
+    "production": "2010-2016"
+  },
+  "XD32": {
+    "series": "R60",
+    "model": "Cooper Countryman",
+    "body": "SUV",
+    "drive": "FWD",
+    "production": "2010-2016"
+  },
+  "XD33": {
+    "series": "R60",
+    "model": "Cooper S Countryman",
+    "body": "SUV",
+    "drive": "ALL4",
+    "production": "2010-2016"
+  },
+  "SS31": {
+    "series": "R61",
+    "model": "Paceman",
+    "body": "SUV Coupe",
+    "drive": "FWD",
+    "production": "2012-2016"
+  },
+  "SS32": {
+    "series": "R61",
+    "model": "Cooper S Paceman",
+    "body": "SUV Coupe",
+    "drive": "ALL4",
+    "production": "2012-2016"
+  }
+}
+

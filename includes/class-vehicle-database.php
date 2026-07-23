@@ -26,36 +26,62 @@ class CP101_Vehicle_Database
         }
     }
 
+    /**
+     * Load a manufacturer-specific JSON database.
+     */
+    private function load_database($folder, $manufacturer)
+    {
+        $manufacturer = strtolower($manufacturer);
+
+        $file = plugin_dir_path(__FILE__) .
+            "Databases/{$folder}/{$manufacturer}.json";
+
+        if (!file_exists($file)) {
+            return [];
+        }
+
+        return json_decode(file_get_contents($file), true) ?: [];
+    }
+
     public function find_vehicle($vin)
     {
         $vin = strtoupper(trim($vin));
 
-        // VIN must be 17 characters
         if (strlen($vin) !== 17) {
             return null;
         }
 
-        // Exact VIN match
+        // 1. Exact VIN lookup
         if (isset($this->vehicles[$vin])) {
             return $this->vehicles[$vin];
         }
 
-        // Manufacturer lookup
+        // 2. Manufacturer lookup
         $wmi = substr($vin, 0, 3);
 
-        if (isset($this->manufacturers[$wmi])) {
-            return [
-                'make'   => $this->manufacturers[$wmi],
-                'model'  => 'Unknown',
-                'year'   => 'Unknown',
-                'plant'  => 'Unknown',
-                'engine' => 'Unknown',
-                'body'   => 'Unknown',
-                'drive'  => ''
-            ];
+        if (!isset($this->manufacturers[$wmi])) {
+            return null;
         }
 
-        // Nothing found locally
-        return null;
+        $manufacturer = $this->manufacturers[$wmi];
+
+        // 3. Load manufacturer-specific model database
+        $models = $this->load_database('models', $manufacturer);
+
+        // MINI/BMW style model code
+        $modelCode = substr($vin, 3, 4);
+
+        $model = $models[$modelCode] ?? [];
+
+        return [
+            'make'   => $manufacturer,
+            'series' => $model['series'] ?? 'Unknown',
+            'model'  => $model['model'] ?? 'Unknown',
+            'body'   => $model['body'] ?? 'Unknown',
+            'drive'  => $model['drive'] ?? 'Unknown',
+            'year'   => 'Unknown',
+            'plant'  => 'Unknown',
+            'engine' => 'Unknown'
+        ];
     }
 }
