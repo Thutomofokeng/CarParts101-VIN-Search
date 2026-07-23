@@ -1,28 +1,28 @@
 {
-    "WMWXM52040T727036": {
-        "make":"MINI",
-        "model":"Cooper",
-        "year":"2012",
-        "engine":"1.6 Petrol",
-        "body":"Hatchback",
-        "drive":"FWD"
+    "WMWXM52040": {
+        "make": "MINI",
+        "model": "Cooper",
+        "year": "2012",
+        "engine": "1.6L Petrol",
+        "body": "Hatchback",
+        "drive": "FWD"
     },
 
-    "AHTXXXXXXXXXXXXXX": {
-        "make":"Toyota",
-        "model":"Hilux",
-        "year":"2022",
-        "engine":"2.8 GD-6",
-        "body":"Double Cab",
-        "drive":"4x4"
+    "WBA": {
+        "make": "BMW",
+        "model": "Unknown",
+        "year": "",
+        "engine": "",
+        "body": "",
+        "drive": ""
     },
 
-    "MNTXXXXXXXXXXXXXX": {
-        "make":"Nissan",
-        "model":"Navara",
-        "year":"2021",
-        "engine":"2.5 dCi",
-        "body":"Double Cab",
-        "drive":"4WD"
+    "JTD": {
+        "make": "Toyota",
+        "model": "Unknown",
+        "year": "",
+        "engine": "",
+        "body": "",
+        "drive": ""
     }
 }
