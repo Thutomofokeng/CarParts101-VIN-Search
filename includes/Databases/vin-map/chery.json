@@ -1,0 +1,118 @@
+{
+    "DB11": {
+        "series": "Tiggo 4",
+        "model": "Tiggo 4",
+        "trim": "",
+        "body": "SUV",
+        "drive": "FWD",
+        "engine": "1.5T",
+        "fuel": "Petrol",
+        "transmission": "",
+        "production": "2022-",
+        "plant": ""
+    },
+
+    "DB12": {
+        "series": "Tiggo 4",
+        "model": "",
+        "trim": "",
+        "body": "SUV",
+        "drive": "",
+        "engine": "",
+        "fuel": "Petrol",
+        "transmission": "",
+        "production": "",
+        "plant": ""
+    },
+
+    "DB13": {
+        "series": "Tiggo 4 Pro",
+        "model": "",
+        "trim": "",
+        "body": "SUV",
+        "drive": "",
+        "engine": "",
+        "fuel": "Petrol",
+        "transmission": "",
+        "production": "",
+        "plant": ""
+    },
+
+    "DC21": {
+        "series": "Tiggo 7 Pro",
+        "model": "",
+        "trim": "",
+        "body": "SUV",
+        "drive": "",
+        "engine": "",
+        "fuel": "Petrol",
+        "transmission": "",
+        "production": "",
+        "plant": ""
+    },
+
+    "DC22": {
+        "series": "Tiggo 7 Pro Max",
+        "model": "",
+        "trim": "",
+        "body": "SUV",
+        "drive": "",
+        "engine": "",
+        "fuel": "Petrol",
+        "transmission": "",
+        "production": "",
+        "plant": ""
+    },
+
+    "DD31": {
+        "series": "Tiggo 8 Pro",
+        "model": "",
+        "trim": "",
+        "body": "SUV",
+        "drive": "",
+        "engine": "",
+        "fuel": "Petrol",
+        "transmission": "",
+        "production": "",
+        "plant": ""
+    },
+
+    "DD32": {
+        "series": "Tiggo 8 Pro Max",
+        "model": "",
+        "trim": "",
+        "body": "SUV",
+        "drive": "AWD",
+        "engine": "",
+        "fuel": "Petrol",
+        "transmission": "",
+        "production": "",
+        "plant": ""
+    },
+
+    "AE11": {
+        "series": "Arrizo 5",
+        "model": "",
+        "trim": "",
+        "body": "Sedan",
+        "drive": "FWD",
+        "engine": "",
+        "fuel": "Petrol",
+        "transmission": "",
+        "production": "",
+        "plant": ""
+    },
+
+    "AE21": {
+        "series": "Arrizo 6 Pro",
+        "model": "",
+        "trim": "",
+        "body": "Sedan",
+        "drive": "FWD",
+        "engine": "",
+        "fuel": "Petrol",
+        "transmission": "",
+        "production": "",
+        "plant": ""
+    }
+}
