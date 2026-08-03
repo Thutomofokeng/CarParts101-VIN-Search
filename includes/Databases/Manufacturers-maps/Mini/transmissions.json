@@ -1,0 +1,83 @@
+{
+    "6MT": {
+        "name": "6-Speed Manual",
+        "type": "Manual",
+        "gears": 6,
+        "manufacturer": "Getrag",
+        "drivetrain": [
+            "FWD",
+            "ALL4"
+        ]
+    },
+
+    "5MT": {
+        "name": "5-Speed Manual",
+        "type": "Manual",
+        "gears": 5,
+        "manufacturer": "Midland",
+        "drivetrain": [
+            "FWD"
+        ]
+    },
+
+    "7DCT": {
+        "name": "7-Speed Dual Clutch",
+        "type": "Dual Clutch",
+        "gears": 7,
+        "manufacturer": "Getrag",
+        "drivetrain": [
+            "FWD"
+        ]
+    },
+
+    "8AT": {
+        "name": "8-Speed Automatic",
+        "type": "Automatic",
+        "gears": 8,
+        "manufacturer": "Aisin",
+        "drivetrain": [
+            "FWD",
+            "ALL4"
+        ]
+    },
+
+    "6AT": {
+        "name": "6-Speed Automatic",
+        "type": "Automatic",
+        "gears": 6,
+        "manufacturer": "Aisin",
+        "drivetrain": [
+            "FWD",
+            "ALL4"
+        ]
+    },
+
+    "CVT": {
+        "name": "Continuously Variable Transmission",
+        "type": "CVT",
+        "gears": null,
+        "manufacturer": "ZF",
+        "drivetrain": [
+            "FWD"
+        ]
+    },
+
+    "AUTO_OR_MANUAL": {
+        "name": "Automatic or Manual",
+        "type": "Unknown",
+        "gears": null,
+        "manufacturer": "",
+        "drivetrain": [
+            "FWD",
+            "ALL4"
+        ]
+    },
+
+    "UNKNOWN": {
+        "name": "Unknown",
+        "type": "Unknown",
+        "gears": null,
+        "manufacturer": "",
+        "drivetrain": []
+    }
+}

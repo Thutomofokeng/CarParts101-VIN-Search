@@ -1,0 +1,153 @@
+{
+    "A": {
+        "name": "Oxford",
+        "city": "Oxford",
+        "country": "United Kingdom",
+        "manufacturer": "MINI",
+        "status": "Active"
+    },
+
+    "B": {
+        "name": "Born",
+        "city": "Born",
+        "country": "Netherlands",
+        "manufacturer": "MINI",
+        "status": "Inactive"
+    },
+
+    "C": {
+        "name": "Graz",
+        "city": "Graz",
+        "country": "Austria",
+        "manufacturer": "MINI",
+        "status": "Active"
+    },
+
+    "D": {
+        "name": "Leipzig",
+        "city": "Leipzig",
+        "country": "Germany",
+        "manufacturer": "BMW",
+        "status": "Active"
+    },
+
+    "E": {
+        "name": "Munich",
+        "city": "Munich",
+        "country": "Germany",
+        "manufacturer": "BMW",
+        "status": "Active"
+    },
+
+    "F": {
+        "name": "Dingolfing",
+        "city": "Dingolfing",
+        "country": "Germany",
+        "manufacturer": "BMW",
+        "status": "Active"
+    },
+
+    "G": {
+        "name": "Regensburg",
+        "city": "Regensburg",
+        "country": "Germany",
+        "manufacturer": "BMW",
+        "status": "Active"
+    },
+
+    "H": {
+        "name": "Rosslyn",
+        "city": "Pretoria",
+        "country": "South Africa",
+        "manufacturer": "BMW",
+        "status": "Active"
+    },
+
+    "J": {
+        "name": "Spartanburg",
+        "city": "Spartanburg",
+        "country": "United States",
+        "manufacturer": "BMW",
+        "status": "Active"
+    },
+
+    "K": {
+        "name": "San Luis Potosi",
+        "city": "San Luis Potosi",
+        "country": "Mexico",
+        "manufacturer": "BMW",
+        "status": "Active"
+    },
+
+    "L": {
+        "name": "Shenyang",
+        "city": "Shenyang",
+        "country": "China",
+        "manufacturer": "BMW Brilliance",
+        "status": "Active"
+    },
+
+    "M": {
+        "name": "Chennai",
+        "city": "Chennai",
+        "country": "India",
+        "manufacturer": "BMW",
+        "status": "Active"
+    },
+
+    "N": {
+        "name": "Rayong",
+        "city": "Rayong",
+        "country": "Thailand",
+        "manufacturer": "BMW",
+        "status": "Active"
+    },
+
+    "P": {
+        "name": "Jakarta",
+        "city": "Jakarta",
+        "country": "Indonesia",
+        "manufacturer": "BMW",
+        "status": "Active"
+    },
+
+    "R": {
+        "name": "Araquari",
+        "city": "Araquari",
+        "country": "Brazil",
+        "manufacturer": "BMW",
+        "status": "Active"
+    },
+
+    "S": {
+        "name": "Kulim",
+        "city": "Kulim",
+        "country": "Malaysia",
+        "manufacturer": "BMW",
+        "status": "Active"
+    },
+
+    "T": {
+        "name": "Cairo",
+        "city": "Cairo",
+        "country": "Egypt",
+        "manufacturer": "BMW",
+        "status": "Active"
+    },
+
+    "U": {
+        "name": "Jakarta Assembly",
+        "city": "Jakarta",
+        "country": "Indonesia",
+        "manufacturer": "BMW",
+        "status": "Active"
+    },
+
+    "V": {
+        "name": "Berlin",
+        "city": "Berlin",
+        "country": "Germany",
+        "manufacturer": "BMW Motorrad",
+        "status": "Active"
+    }
+}

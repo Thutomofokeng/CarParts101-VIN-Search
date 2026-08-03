@@ -1,0 +1,235 @@
+{
+  "XM54": {
+    "series": "R50",
+    "model": "One D",
+    "trim": "",
+    "body": "3-door Hatchback",
+    "drive": "FWD",
+    "engine": "1.4L Diesel",
+    "fuel": "Diesel",
+    "transmission": "",
+    "production": "2003-2006",
+    "plant": "Oxford"
+  },
+
+  "RF32": {
+    "series": "R52",
+    "model": "Cooper Convertible",
+    "trim": "",
+    "body": "Convertible",
+    "drive": "FWD",
+    "engine": "1.6L Petrol",
+    "fuel": "Petrol",
+    "transmission": "",
+    "production": "2004-2008",
+    "plant": "Oxford"
+  },
+
+  "RF33": {
+    "series": "R52",
+    "model": "Cooper S Convertible",
+    "trim": "",
+    "body": "Convertible",
+    "drive": "FWD",
+    "engine": "1.6L Supercharged Petrol",
+    "fuel": "Petrol",
+    "transmission": "",
+    "production": "2004-2008",
+    "plant": "Oxford"
+  },
+
+  "MF31": {
+    "series": "R56",
+    "model": "One",
+    "trim": "",
+    "body": "3-door Hatchback",
+    "drive": "FWD",
+    "engine": "1.4L Petrol",
+    "fuel": "Petrol",
+    "transmission": "",
+    "production": "2006-2013",
+    "plant": "Oxford"
+  },
+
+  "MF32": {
+    "series": "R56",
+    "model": "Cooper",
+    "trim": "",
+    "body": "3-door Hatchback",
+    "drive": "FWD",
+    "engine": "1.6L Petrol",
+    "fuel": "Petrol",
+    "transmission": "",
+    "production": "2006-2013",
+    "plant": "Oxford"
+  },
+
+  "MF33": {
+    "series": "R56",
+    "model": "Cooper S",
+    "trim": "",
+    "body": "3-door Hatchback",
+    "drive": "FWD",
+    "engine": "1.6L Turbo Petrol",
+    "fuel": "Petrol",
+    "transmission": "",
+    "production": "2006-2013",
+    "plant": "Oxford"
+  },
+
+  "MM31": {
+    "series": "R55",
+    "model": "Clubman",
+    "trim": "",
+    "body": "Estate",
+    "drive": "FWD",
+    "engine": "1.4L Petrol",
+    "fuel": "Petrol",
+    "transmission": "",
+    "production": "2007-2014",
+    "plant": "Oxford"
+  },
+
+  "MM32": {
+    "series": "R55",
+    "model": "Cooper Clubman",
+    "trim": "",
+    "body": "Estate",
+    "drive": "FWD",
+    "engine": "1.6L Petrol",
+    "fuel": "Petrol",
+    "transmission": "",
+    "production": "2007-2014",
+    "plant": "Oxford"
+  },
+
+  "MM33": {
+    "series": "R55",
+    "model": "Cooper S Clubman",
+    "trim": "",
+    "body": "Estate",
+    "drive": "FWD",
+    "engine": "1.6L Turbo Petrol",
+    "fuel": "Petrol",
+    "transmission": "",
+    "production": "2007-2014",
+    "plant": "Oxford"
+  },
+
+  "SX31": {
+    "series": "R58",
+    "model": "Cooper Coupé",
+    "trim": "",
+    "body": "Coupe",
+    "drive": "FWD",
+    "engine": "1.6L Petrol",
+    "fuel": "Petrol",
+    "transmission": "",
+    "production": "2011-2015",
+    "plant": "Oxford"
+  },
+
+  "SX32": {
+    "series": "R58",
+    "model": "Cooper S Coupé",
+    "trim": "",
+    "body": "Coupe",
+    "drive": "FWD",
+    "engine": "1.6L Turbo Petrol",
+    "fuel": "Petrol",
+    "transmission": "",
+    "production": "2011-2015",
+    "plant": "Oxford"
+  },
+
+  "ZX31": {
+    "series": "R59",
+    "model": "Cooper Roadster",
+    "trim": "",
+    "body": "Roadster",
+    "drive": "FWD",
+    "engine": "1.6L Petrol",
+    "fuel": "Petrol",
+    "transmission": "",
+    "production": "2012-2015",
+    "plant": "Oxford"
+  },
+
+  "ZX32": {
+    "series": "R59",
+    "model": "Cooper S Roadster",
+    "trim": "",
+    "body": "Roadster",
+    "drive": "FWD",
+    "engine": "1.6L Turbo Petrol",
+    "fuel": "Petrol",
+    "transmission": "",
+    "production": "2012-2015",
+    "plant": "Oxford"
+  },
+
+  "XD31": {
+    "series": "R60",
+    "model": "Countryman",
+    "trim": "",
+    "body": "SUV",
+    "drive": "FWD",
+    "engine": "1.6L Petrol",
+    "fuel": "Petrol",
+    "transmission": "",
+    "production": "2010-2016",
+    "plant": "Graz"
+  },
+
+  "XD32": {
+    "series": "R60",
+    "model": "Cooper Countryman",
+    "trim": "",
+    "body": "SUV",
+    "drive": "FWD",
+    "engine": "1.6L Petrol",
+    "fuel": "Petrol",
+    "transmission": "",
+    "production": "2010-2016",
+    "plant": "Graz"
+  },
+
+  "XD33": {
+    "series": "R60",
+    "model": "Cooper S Countryman",
+    "trim": "",
+    "body": "SUV",
+    "drive": "ALL4",
+    "engine": "1.6L Turbo Petrol",
+    "fuel": "Petrol",
+    "transmission": "",
+    "production": "2010-2016",
+    "plant": "Graz"
+  },
+
+  "SS31": {
+    "series": "R61",
+    "model": "Paceman",
+    "trim": "",
+    "body": "SUV Coupe",
+    "drive": "FWD",
+    "engine": "1.6L Petrol",
+    "fuel": "Petrol",
+    "transmission": "",
+    "production": "2012-2016",
+    "plant": "Graz"
+  },
+
+  "SS32": {
+    "series": "R61",
+    "model": "Cooper S Paceman",
+    "trim": "",
+    "body": "SUV Coupe",
+    "drive": "ALL4",
+    "engine": "1.6L Turbo Petrol",
+    "fuel": "Petrol",
+    "transmission": "",
+    "production": "2012-2016",
+    "plant": "Graz"
+  }
+}

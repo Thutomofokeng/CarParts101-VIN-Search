@@ -6,55 +6,55 @@ if (!defined('ABSPATH')) {
 
 class CP101_Vehicle_Database
 {
-    private $vehicles = [];
-    private $manufacturers = [];
+    /**
+     * Database loader.
+     *
+     * @var DatabaseLoader
+     */
+    private DatabaseLoader $loader;
+
+    /**
+     * WMI database.
+     *
+     * @var array
+     */
+    private array $manufacturers = [];
+
+    /**
+     * Year database.
+     *
+     * @var array
+     */
+    private array $years = [];
+
+    /**
+     * Plant database.
+     *
+     * @var array
+     */
+    private array $plants = [];
+
+    /**
+     * Engine database.
+     *
+     * @var array
+     */
+    private array $engines = [];
 
     public function __construct()
     {
-        // Load VIN database
-        $vehicleFile = plugin_dir_path(__FILE__) . 'Databases/vehicles.json';
+        $this->loader = new DatabaseLoader();
 
-        if (file_exists($vehicleFile)) {
-            $this->vehicles = json_decode(file_get_contents($vehicleFile), true) ?: [];
-        }
-
-        // Load WMI database
-        $wmiFile = plugin_dir_path(__FILE__) . 'wmi.php';
-
-        if (file_exists($wmiFile)) {
-            $this->manufacturers = require $wmiFile;
-        } else {
-            error_log('CP101: wmi.php not found.');
-        }
+        $this->manufacturers = $this->loader->load('manufacturers');
+        $this->years         = $this->loader->load('years');
+        $this->plants        = $this->loader->load('plants');
+        $this->engines       = $this->loader->load('engines');
     }
 
     /**
-     * Load manufacturer model database
+     * Find a vehicle from its VIN.
      */
-    private function load_database($manufacturer)
-    {
-        $manufacturer = strtolower($manufacturer);
-
-        $file = plugin_dir_path(__FILE__) .
-            "Databases/models/{$manufacturer}.json";
-
-        if (!file_exists($file)) {
-            error_log("CP101: Missing model database {$file}");
-            return [];
-        }
-
-        $json = file_get_contents($file);
-        $data = json_decode($json, true);
-
-        if (json_last_error() !== JSON_ERROR_NONE) {
-            error_log('CP101 JSON Error: ' . json_last_error_msg());
-            return [];
-        }
-
-        return $data;
-    }
-
-    public function find_vehicle($vin)
+    public function find_vehicle(string $vin): ?array
     {
         $vin = strtoupper(trim($vin));
 
@@ -62,66 +62,78 @@ class CP101_Vehicle_Database
             return null;
         }
 
-        /*
-         * Exact VIN database
-         */
-        if (isset($this->vehicles[$vin])) {
-            return $this->vehicles[$vin];
-        }
-
-        /*
-         * Manufacturer lookup
-         */
+        // WMI
         $wmi = substr($vin, 0, 3);
 
         if (!isset($this->manufacturers[$wmi])) {
-            error_log("CP101: Unknown WMI {$wmi}");
             return null;
         }
 
-        $manufacturer = strtolower($this->manufacturers[$wmi]);
+        $manufacturer = $this->manufacturers[$wmi]['manufacturer'];
 
-        /*
-         * Load manufacturer database
-         */
-        $models = $this->load_database($manufacturer);
+        // Load all model files (R-models, F-models, J-models, etc.)
+        $models = $this->loader->loadManufacturerModels($manufacturer);
 
-        if (empty($models)) {
-            return null;
-        }
-
-        /*
-         * VIN model code
-         */
+        // VDS (positions 4-7)
         $modelCode = strtoupper(substr($vin, 3, 4));
 
         if (!isset($models[$modelCode])) {
-
-            echo '<pre>';
-            echo "Manufacturer : {$manufacturer}\n";
-            echo "VIN          : {$vin}\n";
-            echo "WMI          : {$wmi}\n";
-            echo "Model Code   : {$modelCode}\n";
-            echo "Database     : Databases/models/{$manufacturer}.json\n";
-            echo "Available Keys:\n";
-            print_r(array_keys($models));
-            echo '</pre>';
-
             return null;
         }
 
-        $model = $models[$modelCode];
+        $vehicle = $models[$modelCode];
+
+        // Model year (position 10)
+        $yearCode = substr($vin, 9, 1);
+
+        $year = $this->years[$yearCode] ?? '';
+
+        // Plant (position 11)
+        $plantCode = substr($vin, 10, 1);
+
+        $plant = $this->plants[$plantCode] ?? [
+            'name' => ''
+        ];
+
+        // Engine
+        $engine = [];
+
+        if (
+            isset($vehicle['engine']) &&
+            isset($this->engines[$vehicle['engine']])
+        ) {
+            $engine = $this->engines[$vehicle['engine']];
+        }
 
         return [
 
-            'make'   => ucfirst($manufacturer),
-            'series' => $model['series'] ?? '',
-            'model'  => $model['model'] ?? '',
-            'body'   => $model['body'] ?? '',
-            'drive'  => $model['drive'] ?? '',
-            'year'   => $model['production'] ?? '',
-            'plant'  => $model['plant'] ?? '',
-            'engine' => $model['engine'] ?? ''
+            'vin' => $vin,
+
+            'manufacturer' => $manufacturer,
+
+            'series' => $vehicle['series'] ?? '',
+
+            'model' => $vehicle['model'] ?? '',
+
+            'trim' => $vehicle['trim'] ?? '',
+
+            'body' => $vehicle['body'] ?? '',
+
+            'drive' => $vehicle['drive'] ?? '',
+
+            'fuel' => $vehicle['fuel'] ?? '',
+
+            'transmission' => $vehicle['transmission'] ?? '',
+
+            'production' => $vehicle['production'] ?? '',
+
+            'year' => $year,
+
+            'plant' => $plant['name'] ?? '',
+
+            'engine' => $engine,
+
+            'engine_code' => $vehicle['engine'] ?? ''
 
         ];
     }

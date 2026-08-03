@@ -1,0 +1,145 @@
+{
+    "W10": {
+        "name": "W10",
+        "family": "Tritec",
+        "manufacturer": "Chrysler / Rover",
+        "configuration": "Inline-4",
+        "displacement_cc": 1598,
+        "fuel": "Petrol",
+        "aspiration": "Naturally Aspirated",
+        "valves": 16,
+        "timing": "Chain"
+    },
+
+    "W11": {
+        "name": "W11",
+        "family": "Tritec",
+        "manufacturer": "Chrysler / Rover",
+        "configuration": "Inline-4",
+        "displacement_cc": 1598,
+        "fuel": "Petrol",
+        "aspiration": "Supercharged",
+        "valves": 16,
+        "timing": "Chain"
+    },
+
+    "N12": {
+        "name": "N12",
+        "family": "Prince",
+        "manufacturer": "BMW / PSA",
+        "configuration": "Inline-4",
+        "displacement_cc": 1598,
+        "fuel": "Petrol",
+        "aspiration": "Naturally Aspirated",
+        "valves": 16,
+        "timing": "Chain"
+    },
+
+    "N14": {
+        "name": "N14",
+        "family": "Prince",
+        "manufacturer": "BMW / PSA",
+        "configuration": "Inline-4",
+        "displacement_cc": 1598,
+        "fuel": "Petrol",
+        "aspiration": "Turbocharged",
+        "valves": 16,
+        "timing": "Chain"
+    },
+
+    "N16": {
+        "name": "N16",
+        "family": "Prince",
+        "manufacturer": "BMW / PSA",
+        "configuration": "Inline-4",
+        "displacement_cc": 1598,
+        "fuel": "Petrol",
+        "aspiration": "Naturally Aspirated",
+        "valves": 16,
+        "timing": "Chain"
+    },
+
+    "N18": {
+        "name": "N18",
+        "family": "Prince",
+        "manufacturer": "BMW / PSA",
+        "configuration": "Inline-4",
+        "displacement_cc": 1598,
+        "fuel": "Petrol",
+        "aspiration": "Turbocharged",
+        "valves": 16,
+        "timing": "Chain"
+    },
+
+    "N47": {
+        "name": "N47",
+        "family": "BMW N-Series",
+        "manufacturer": "BMW",
+        "configuration": "Inline-4",
+        "displacement_cc": 1995,
+        "fuel": "Diesel",
+        "aspiration": "Turbocharged",
+        "valves": 16,
+        "timing": "Chain"
+    },
+
+    "B37": {
+        "name": "B37",
+        "family": "BMW B-Series",
+        "manufacturer": "BMW",
+        "configuration": "Inline-3",
+        "displacement_cc": 1496,
+        "fuel": "Diesel",
+        "aspiration": "Turbocharged",
+        "valves": 12,
+        "timing": "Chain"
+    },
+
+    "B38": {
+        "name": "B38",
+        "family": "BMW B-Series",
+        "manufacturer": "BMW",
+        "configuration": "Inline-3",
+        "displacement_cc": 1499,
+        "fuel": "Petrol",
+        "aspiration": "Turbocharged",
+        "valves": 12,
+        "timing": "Chain"
+    },
+
+    "B47": {
+        "name": "B47",
+        "family": "BMW B-Series",
+        "manufacturer": "BMW",
+        "configuration": "Inline-4",
+        "displacement_cc": 1995,
+        "fuel": "Diesel",
+        "aspiration": "Turbocharged",
+        "valves": 16,
+        "timing": "Chain"
+    },
+
+    "B48": {
+        "name": "B48",
+        "family": "BMW B-Series",
+        "manufacturer": "BMW",
+        "configuration": "Inline-4",
+        "displacement_cc": 1998,
+        "fuel": "Petrol",
+        "aspiration": "Turbocharged",
+        "valves": 16,
+        "timing": "Chain"
+    },
+
+    "B58": {
+        "name": "B58",
+        "family": "BMW B-Series",
+        "manufacturer": "BMW",
+        "configuration": "Inline-6",
+        "displacement_cc": 2998,
+        "fuel": "Petrol",
+        "aspiration": "Turbocharged",
+        "valves": 24,
+        "timing": "Chain"
+    }
+}

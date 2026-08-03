@@ -7,166 +7,215 @@ if (!defined('ABSPATH')) {
 class DatabaseLoader
 {
     /**
-     * In-memory cache.
+     * Loaded database cache
      *
      * @var array
      */
-    private static array $cache = [];
+    private array $cache = [];
 
     /**
-     * Database root directory.
+     * Base database directory
      *
      * @var string
      */
     private string $databasePath;
 
-    /**
-     * Constructor.
-     */
     public function __construct()
     {
-        $this->databasePath = plugin_dir_path(__FILE__) . '../Databases/';
+        $this->databasePath = plugin_dir_path(dirname(__FILE__)) . 'Databases/';
     }
 
     /**
-     * Load a JSON database.
+     * Load any JSON database.
      *
      * Examples:
      *
-     * load('manufacturers');
-     * load('years');
-     * load('plants');
-     * load('engines');
-     * load('body-types');
-     * load('models/bmw');
-     * load('manufacturer-maps/mini');
-     *
-     * @param string $database
-     * @return array
-     * @throws RuntimeException
+     * manufacturers
+     * years
+     * Manufacturers-maps/Mini/engines
      */
     public function load(string $database): array
     {
-        $database = trim($database);
-
-        /*
-        |--------------------------------------------------------------------------
-        | Return from cache
-        |--------------------------------------------------------------------------
-        */
-
-        if (isset(self::$cache[$database])) {
-            return self::$cache[$database];
+        if (isset($this->cache[$database])) {
+            return $this->cache[$database];
         }
-
-        /*
-        |--------------------------------------------------------------------------
-        | Build file path
-        |--------------------------------------------------------------------------
-        */
 
         $file = $this->databasePath . $database . '.json';
 
-        /*
-        |--------------------------------------------------------------------------
-        | File does not exist
-        |--------------------------------------------------------------------------
-        */
-
         if (!file_exists($file)) {
-            throw new RuntimeException(
-                sprintf(
-                    'Database "%s" not found (%s)',
-                    $database,
-                    $file
-                )
-            );
+            throw new Exception("Database '{$database}' not found.");
         }
-
-        /*
-        |--------------------------------------------------------------------------
-        | Read file
-        |--------------------------------------------------------------------------
-        */
 
         $json = file_get_contents($file);
 
         if ($json === false) {
-            throw new RuntimeException(
-                sprintf(
-                    'Unable to read database "%s"',
-                    $database
-                )
-            );
+            throw new Exception("Unable to read '{$database}'.");
         }
-
-        /*
-        |--------------------------------------------------------------------------
-        | Decode JSON
-        |--------------------------------------------------------------------------
-        */
 
         $data = json_decode($json, true);
 
         if (json_last_error() !== JSON_ERROR_NONE) {
-            throw new RuntimeException(
-                sprintf(
-                    'JSON error in "%s": %s',
-                    $database,
-                    json_last_error_msg()
-                )
+            throw new Exception(
+                "Invalid JSON in '{$database}': " .
+                json_last_error_msg()
             );
         }
 
-        /*
-        |--------------------------------------------------------------------------
-        | Cache
-        |--------------------------------------------------------------------------
-        */
-
-        self::$cache[$database] = $data;
+        $this->cache[$database] = $data;
 
         return $data;
     }
 
     /**
-     * Clear one cached database.
+     * Automatically load every model file
+     * inside a manufacturer folder.
      *
-     * @param string $database
+     * Example:
+     *
+     * Mini/
+     *   R-models.json
+     *   F-models.json
+     *   J-models.json
+     *
      */
-    public function clear(string $database): void
+    public function loadManufacturerModels(string $manufacturer): array
     {
-        unset(self::$cache[$database]);
+        $cacheKey = "models_{$manufacturer}";
+
+        if (isset($this->cache[$cacheKey])) {
+            return $this->cache[$cacheKey];
+        }
+
+        $directory = $this->databasePath .
+            'Manufacturers-maps/' .
+            $manufacturer;
+
+        if (!is_dir($directory)) {
+            throw new Exception(
+                "Manufacturer '{$manufacturer}' not found."
+            );
+        }
+
+        $files = glob($directory . '/*-models.json');
+
+        if (!$files) {
+            return [];
+        }
+
+        sort($files);
+
+        $models = [];
+
+        foreach ($files as $file) {
+
+            $json = file_get_contents($file);
+
+            if ($json === false) {
+                continue;
+            }
+
+            $data = json_decode($json, true);
+
+            if (json_last_error() !== JSON_ERROR_NONE) {
+                throw new Exception(
+                    "Invalid JSON in " . basename($file)
+                );
+            }
+
+            $models = array_merge($models, $data);
+        }
+
+        $this->cache[$cacheKey] = $models;
+
+        return $models;
+    }
+
+    /**
+     * Load every JSON file
+     * from a manufacturer folder.
+     *
+     * Returns:
+     *
+     * [
+     *     'engines' => [...],
+     *     'transmissions' => [...],
+     *     'body-types' => [...]
+     * ]
+     *
+     */
+    public function loadManufacturerData(string $manufacturer): array
+    {
+        $cacheKey = "manufacturer_{$manufacturer}";
+
+        if (isset($this->cache[$cacheKey])) {
+            return $this->cache[$cacheKey];
+        }
+
+        $directory = $this->databasePath .
+            'Manufacturers-maps/' .
+            $manufacturer;
+
+        if (!is_dir($directory)) {
+            throw new Exception(
+                "Manufacturer '{$manufacturer}' not found."
+            );
+        }
+
+        $files = glob($directory . '/*.json');
+
+        $data = [];
+
+        foreach ($files as $file) {
+
+            $name = basename($file, '.json');
+
+            $json = file_get_contents($file);
+
+            if ($json === false) {
+                continue;
+            }
+
+            $decoded = json_decode($json, true);
+
+            if (json_last_error() !== JSON_ERROR_NONE) {
+                throw new Exception(
+                    "Invalid JSON in {$name}.json"
+                );
+            }
+
+            $data[$name] = $decoded;
+        }
+
+        $this->cache[$cacheKey] = $data;
+
+        return $data;
+    }
+
+    /**
+     * Check if a database exists.
+     */
+    public function exists(string $database): bool
+    {
+        return file_exists(
+            $this->databasePath .
+            $database .
+            '.json'
+        );
     }
 
     /**
      * Clear all cached databases.
      */
-    public function clearAll(): void
+    public function clearCache(): void
     {
-        self::$cache = [];
+        $this->cache = [];
     }
 
     /**
-     * Check if a database has already been loaded.
-     *
-     * @param string $database
-     * @return bool
+     * Return loaded cache.
      */
-    public function isLoaded(string $database): bool
+    public function getCache(): array
     {
-        return isset(self::$cache[$database]);
-    }
-
-    /**
-     * Return all currently cached databases.
-     *
-     * Useful for debugging.
-     *
-     * @return array
-     */
-    public function getLoadedDatabases(): array
-    {
-        return array_keys(self::$cache);
+        return $this->cache;
     }
 }
