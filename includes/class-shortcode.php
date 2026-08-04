@@ -70,9 +70,9 @@ if(!empty($_POST['cp101_vin'])){
  if(strlen($vin)!=17){
    echo '<p style="color:red;">Please enter a valid 17-character VIN.</p>';
  } else {
-   $db = new CP101_Vehicle_Database();
+  $decoder = VINDecoderFactory::make();
 
-$vehicle = $db->find_vehicle($vin);
+$vehicle = $decoder->resolve($vin);
 
 if (!$vehicle) {
 
@@ -133,8 +133,8 @@ if (!$vehicle) {
 }
 if(class_exists('WooCommerce')){
  echo '<h2>Compatible Parts</h2><div class="cp101-grid">';
- $make  = $vehicle['Make'] ?? $vehicle['make'] ?? '';
-$model = $vehicle['Model'] ?? $vehicle['model'] ?? '';
+ $make  = $vehicle['manufacturer'] ?? $vehicle['Make'] ?? '';
+$model = $vehicle['model'] ?? $vehicle['Model'] ?? '';
 
 $search = trim($make . ' ' . $model);
  $args=[

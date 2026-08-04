@@ -12,44 +12,49 @@ class ManufacturerResolver
     private array $manufacturers = [];
 
     /**
-     * Register manufacturer decoders.
-     *
-     * @param array<string, DecoderInterface> $manufacturers
+     * Constructor.
      */
-    public function __construct(array $manufacturers = [])
+    public function __construct(DatabaseLoader $loader)
     {
-        $this->manufacturers = $manufacturers;
-    }
+        // Register all manufacturer decoders here
 
-    /**
-     * Resolve manufacturer specific decoding.
-     *
-     * @param array $vehicle
-     * @return array
-     */
-    public function decode(array $vehicle): array
-    {
-        $manufacturer = $vehicle['manufacturer'] ?? '';
+        $this->register(
+            'MINI',
+            new MINIDecoder($loader)
+        );
 
-        if (!isset($this->manufacturers[$manufacturer])) {
-            return $vehicle;
-        }
-
-        return $this->manufacturers[$manufacturer]->decode($vehicle);
+        // Future manufacturers
+        // $this->register('BMW', new BMWDecoder($loader));
+        // $this->register('AUDI', new AudiDecoder($loader));
+        // $this->register('TOYOTA', new ToyotaDecoder($loader));
     }
 
     /**
      * Register a manufacturer decoder.
-     *
-     * @param string $manufacturer
-     * @param DecoderInterface $decoder
      */
     public function register(
         string $manufacturer,
         DecoderInterface $decoder
     ): void {
 
-        $this->manufacturers[$manufacturer] = $decoder;
+        $this->manufacturers[strtoupper($manufacturer)] = $decoder;
 
+    }
+
+    /**
+     * Decode manufacturer-specific VIN information.
+     */
+    public function decode(array $vehicle): array
+    {
+        $manufacturer = strtoupper(
+            $vehicle['manufacturer'] ?? ''
+        );
+
+        if (!isset($this->manufacturers[$manufacturer])) {
+            return $vehicle;
+        }
+
+        return $this->manufacturers[$manufacturer]
+            ->decode($vehicle);
     }
 }

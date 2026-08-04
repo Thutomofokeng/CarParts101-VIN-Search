@@ -6,10 +6,17 @@ if (!defined('ABSPATH')) {
 
 class WMIDecoder implements DecoderInterface
 {
+    /**
+     * Database loader.
+     *
+     * @var DatabaseLoader
+     */
     private DatabaseLoader $loader;
 
     /**
-     * Constructor
+     * Constructor.
+     *
+     * @param DatabaseLoader $loader
      */
     public function __construct(DatabaseLoader $loader)
     {
@@ -17,7 +24,9 @@ class WMIDecoder implements DecoderInterface
     }
 
     /**
-     * Decode the WMI into a manufacturer.
+     * Decode the World Manufacturer Identifier (WMI).
+     *
+     * Characters 1–3 of the VIN determine the manufacturer.
      *
      * @param array $vehicle
      * @return array
@@ -26,8 +35,17 @@ class WMIDecoder implements DecoderInterface
     {
         $manufacturers = $this->loader->load('manufacturers');
 
-        $vehicle['manufacturer'] =
-            $manufacturers[$vehicle['wmi']] ?? null;
+        $wmi = strtoupper($vehicle['wmi'] ?? '');
+
+        if (
+            isset($manufacturers[$wmi]) &&
+            isset($manufacturers[$wmi]['manufacturer'])
+        ) {
+
+            $vehicle['manufacturer'] =
+                $manufacturers[$wmi]['manufacturer'];
+
+        }
 
         return $vehicle;
     }

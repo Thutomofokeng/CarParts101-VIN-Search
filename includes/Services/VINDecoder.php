@@ -8,32 +8,30 @@ class VINDecoder
 {
     private VINValidator $validator;
     private VINParser $parser;
-    private DatabaseLoader $loader;
+    private ManufacturerResolver $manufacturerResolver;
     private WMIDecoder $wmiDecoder;
     private YearDecoder $yearDecoder;
     private PlantDecoder $plantDecoder;
 
     /**
-     * Constructor
+     * Constructor.
      */
-    public function __construct(
-        VINValidator $validator,
-        VINParser $parser,
-        DatabaseLoader $loader,
-        WMIDecoder $wmiDecoder,
-        YearDecoder $yearDecoder,
-        PlantDecoder $plantDecoder
-    ) {
-        $this->validator    = $validator;
-        $this->parser       = $parser;
-        $this->loader       = $loader;
-        $this->wmiDecoder   = $wmiDecoder;
-        $this->yearDecoder  = $yearDecoder;
-        $this->plantDecoder = $plantDecoder;
+    public function __construct()
+    {
+        $loader = new DatabaseLoader();
+
+        $this->validator = new VINValidator();
+        $this->parser = new VINParser();
+
+        $this->manufacturerResolver = new ManufacturerResolver($loader);
+
+        $this->wmiDecoder = new WMIDecoder($loader);
+        $this->yearDecoder = new YearDecoder($loader);
+        $this->plantDecoder = new PlantDecoder($loader);
     }
 
     /**
-     * Resolve a VIN.
+     * Decode a VIN.
      */
     public function resolve(string $vin): ?array
     {
@@ -41,32 +39,46 @@ class VINDecoder
             return null;
         }
 
+        // Parse VIN
         $vehicle = $this->parser->parse($vin);
 
+        // Generic decoders
         $vehicle = $this->wmiDecoder->decode($vehicle);
-
         $vehicle = $this->yearDecoder->decode($vehicle);
-
         $vehicle = $this->plantDecoder->decode($vehicle);
 
+        // Manufacturer-specific decoder
+        $vehicle = $this->manufacturerResolver->decode($vehicle);
+
+        // Confidence score
         $vehicle['confidence'] = $this->calculateConfidence($vehicle);
 
         return $vehicle;
     }
 
     /**
-     * Calculate confidence score.
+     * Calculate confidence.
      */
     private function calculateConfidence(array $vehicle): int
     {
         $score = 0;
 
-        if (!empty($vehicle['manufacturer'])) $score += 30;
-        if (!empty($vehicle['year']))         $score += 20;
-        if (!empty($vehicle['plant']))        $score += 10;
-        if (!empty($vehicle['model']))        $score += 20;
-        if (!empty($vehicle['engine']))       $score += 10;
-        if (!empty($vehicle['body']))         $score += 10;
+        $fields = [
+            'manufacturer',
+            'model',
+            'series',
+            'year',
+            'plant',
+            'engine',
+            'body',
+            'trim'
+        ];
+
+        foreach ($fields as $field) {
+            if (!empty($vehicle[$field])) {
+                $score += 12;
+            }
+        }
 
         return min($score, 100);
     }

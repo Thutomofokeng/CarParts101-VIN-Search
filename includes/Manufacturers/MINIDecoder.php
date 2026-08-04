@@ -4,10 +4,10 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-class MINI implements DecoderInterface
+class MINIDecoder implements DecoderInterface
 {
     /**
-     * Database loader.
+     * @var DatabaseLoader
      */
     private DatabaseLoader $loader;
 
@@ -20,32 +20,38 @@ class MINI implements DecoderInterface
     }
 
     /**
-     * Decode MINI-specific VIN information.
-     *
-     * @param array $vehicle
-     * @return array
+     * Decode MINI VIN information.
      */
     public function decode(array $vehicle): array
     {
-        // Only process MINI vehicles
         if (($vehicle['manufacturer'] ?? '') !== 'MINI') {
             return $vehicle;
         }
 
-        // Load MINI mapping database
-        $map = $this->loader->load('manufacturer-maps/mini');
+        $models = $this->loader->loadManufacturerModels('Mini');
 
-        // Use the Vehicle Descriptor Section (characters 4-8)
-        $vds = $vehicle['vds'];
+        // Characters 4–7
+        $modelCode = strtoupper(substr($vehicle['vin'], 3, 4));
 
-        if (isset($map['vds'][$vds])) {
-
-            $vehicle = array_merge(
-                $vehicle,
-                $map['vds'][$vds]
-            );
+        if (!isset($models[$modelCode])) {
+            return $vehicle;
         }
 
-        return $vehicle;
+        $model = $models[$modelCode];
+
+        return array_merge($vehicle, [
+
+            'series'       => $model['series'] ?? null,
+            'model'        => $model['model'] ?? null,
+            'generation'   => $model['generation'] ?? null,
+            'trim'         => $model['trim'] ?? null,
+            'body'         => $model['body'] ?? null,
+            'drive'        => $model['drive'] ?? null,
+            'fuel'         => $model['fuel'] ?? null,
+            'transmission' => $model['transmission'] ?? null,
+            'engine'       => $model['engine'] ?? null,
+            'production'   => $model['production'] ?? null,
+
+        ]);
     }
 }
