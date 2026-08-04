@@ -2,7 +2,7 @@
 /*
 Plugin Name: CarParts101 VIN Search
 Description: VIN lookup integrated with WooCommerce.
-Version: 0.2.0
+Version: 0.3.0
 Author: CarParts101
 */
 
@@ -34,6 +34,14 @@ require_once CP101_VIN_PATH . 'includes/Decoders/BodyDecoder.php';
 
 /*
 |--------------------------------------------------------------------------
+| Manufacturers
+|--------------------------------------------------------------------------
+*/
+
+require_once CP101_VIN_PATH . 'includes/Manufacturers/MINIDecoder.php';
+
+/*
+|--------------------------------------------------------------------------
 | Services
 |--------------------------------------------------------------------------
 */
@@ -47,19 +55,10 @@ require_once CP101_VIN_PATH . 'includes/Services/VINDecoderFactory.php';
 
 /*
 |--------------------------------------------------------------------------
-| Manufacturers
+| WordPress
 |--------------------------------------------------------------------------
 */
 
-require_once CP101_VIN_PATH . 'includes/Manufacturers/MINIDecoder.php';
-
-/*
-|--------------------------------------------------------------------------
-| WordPress Classes
-|--------------------------------------------------------------------------
-*/
-
-require_once CP101_VIN_PATH . 'includes/class-vehicle-database.php';
 require_once CP101_VIN_PATH . 'includes/class-shortcode.php';
 require_once CP101_VIN_PATH . 'includes/class-admin.php';
 

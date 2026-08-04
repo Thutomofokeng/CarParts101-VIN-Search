@@ -114,15 +114,20 @@ if (!$vehicle) {
     echo '<h2>Vehicle Identified</h2><table class="widefat striped">';
 
     $fields = [
-        'Make'       => 'make',
-        'Model'      => 'model',
-        'Model Year' => 'year',
-        'Plant'      => 'plant',
-        'Engine'     => 'engine',
-        'Body'       => 'body',
-        'Drive'      => 'drive'
-    ];
-
+    'Manufacturer' => 'manufacturer',
+    'Model'        => 'model',
+    'Series'       => 'series',
+    'Generation'   => 'generation',
+    'Trim'         => 'trim',
+    'Model Year'   => 'year',
+    'Plant'        => 'plant',
+    'Engine'       => 'engine',
+    'Fuel'         => 'fuel',
+    'Body'         => 'body',
+    'Drive'        => 'drive',
+    'Transmission' => 'transmission',
+    'Confidence'   => 'confidence'
+];
     foreach ($fields as $label => $key) {
         if (!empty($vehicle[$key])) {
             echo '<tr><th>' . esc_html($label) . '</th><td>' . esc_html($vehicle[$key]) . '</td></tr>';
@@ -143,10 +148,10 @@ $search = trim($make . ' ' . $model);
  's'=>$search
  ];
  $q=new WP_Query($args);
- if(!$q->have_posts() && !empty($vehicle['Make'])){
-   $args['s']=$vehicle['Make'];
-   $q=new WP_Query($args);
- }
+ if (!$q->have_posts() && !empty($make)) {
+    $args['s'] = $make;
+    $q = new WP_Query($args);
+}
  while($q->have_posts()){ $q->the_post(); global $product;
  echo '<div class="cp101-card">';
  echo get_the_post_thumbnail(get_the_ID(),'medium');

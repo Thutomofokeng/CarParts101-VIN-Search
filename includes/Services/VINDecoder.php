@@ -6,28 +6,43 @@ if (!defined('ABSPATH')) {
 
 class VINDecoder
 {
+    /**
+     * Core services.
+     */
     private VINValidator $validator;
     private VINParser $parser;
-    private ManufacturerResolver $manufacturerResolver;
+
+    /**
+     * Generic decoders.
+     */
     private WMIDecoder $wmiDecoder;
     private YearDecoder $yearDecoder;
     private PlantDecoder $plantDecoder;
 
     /**
+     * Manufacturer resolver.
+     */
+    private ManufacturerResolver $manufacturerResolver;
+
+    /**
      * Constructor.
      */
-    public function __construct()
-    {
-        $loader = new DatabaseLoader();
+    public function __construct(
+        VINValidator $validator,
+        VINParser $parser,
+        ManufacturerResolver $manufacturerResolver,
+        WMIDecoder $wmiDecoder,
+        YearDecoder $yearDecoder,
+        PlantDecoder $plantDecoder
+    ) {
+        $this->validator = $validator;
+        $this->parser = $parser;
 
-        $this->validator = new VINValidator();
-        $this->parser = new VINParser();
+        $this->manufacturerResolver = $manufacturerResolver;
 
-        $this->manufacturerResolver = new ManufacturerResolver($loader);
-
-        $this->wmiDecoder = new WMIDecoder($loader);
-        $this->yearDecoder = new YearDecoder($loader);
-        $this->plantDecoder = new PlantDecoder($loader);
+        $this->wmiDecoder = $wmiDecoder;
+        $this->yearDecoder = $yearDecoder;
+        $this->plantDecoder = $plantDecoder;
     }
 
     /**
@@ -35,29 +50,55 @@ class VINDecoder
      */
     public function resolve(string $vin): ?array
     {
+        /*
+        |--------------------------------------------------------------------------
+        | Validate VIN
+        |--------------------------------------------------------------------------
+        */
+
         if (!$this->validator->validate($vin)) {
             return null;
         }
 
-        // Parse VIN
+        /*
+        |--------------------------------------------------------------------------
+        | Parse VIN
+        |--------------------------------------------------------------------------
+        */
+
         $vehicle = $this->parser->parse($vin);
 
-        // Generic decoders
+        /*
+        |--------------------------------------------------------------------------
+        | Generic VIN decoding
+        |--------------------------------------------------------------------------
+        */
+
         $vehicle = $this->wmiDecoder->decode($vehicle);
         $vehicle = $this->yearDecoder->decode($vehicle);
         $vehicle = $this->plantDecoder->decode($vehicle);
 
-        // Manufacturer-specific decoder
+        /*
+        |--------------------------------------------------------------------------
+        | Manufacturer-specific decoding
+        |--------------------------------------------------------------------------
+        */
+
         $vehicle = $this->manufacturerResolver->decode($vehicle);
 
-        // Confidence score
+        /*
+        |--------------------------------------------------------------------------
+        | Confidence Score
+        |--------------------------------------------------------------------------
+        */
+
         $vehicle['confidence'] = $this->calculateConfidence($vehicle);
 
         return $vehicle;
     }
 
     /**
-     * Calculate confidence.
+     * Calculate decoder confidence.
      */
     private function calculateConfidence(array $vehicle): int
     {
@@ -67,16 +108,20 @@ class VINDecoder
             'manufacturer',
             'model',
             'series',
+            'generation',
+            'trim',
             'year',
             'plant',
             'engine',
             'body',
-            'trim'
+            'fuel',
+            'drive',
+            'transmission'
         ];
 
         foreach ($fields as $field) {
             if (!empty($vehicle[$field])) {
-                $score += 12;
+                $score += 8;
             }
         }
 

@@ -8,12 +8,12 @@ class VINDecoderFactory
 {
     /**
      * Build a fully configured VIN decoder.
-     *
-     * @return VINDecoder
      */
     public static function make(): VINDecoder
     {
         $loader = new DatabaseLoader();
+
+        $manufacturerResolver = new ManufacturerResolver($loader);
 
         return new VINDecoder(
 
@@ -21,9 +21,7 @@ class VINDecoderFactory
 
             new VINParser(),
 
-            $loader,
-
-            new ManufacturerResolver($loader),
+            $manufacturerResolver,
 
             new WMIDecoder($loader),
 

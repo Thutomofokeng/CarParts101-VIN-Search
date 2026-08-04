@@ -1,52 +1,20 @@
-<?php
-
-if (!defined('ABSPATH')) {
-    exit;
-}
-
-class WMIDecoder implements DecoderInterface
+/**
+ * Decode the World Manufacturer Identifier (WMI).
+ *
+ * Characters 1–3 of the VIN determine the manufacturer.
+ *
+ * @param array $vehicle
+ * @return array
+ */
+public function decode(array $vehicle): array
 {
-    /**
-     * Database loader.
-     *
-     * @var DatabaseLoader
-     */
-    private DatabaseLoader $loader;
+    $manufacturers = $this->loader->load('manufacturers');
 
-    /**
-     * Constructor.
-     *
-     * @param DatabaseLoader $loader
-     */
-    public function __construct(DatabaseLoader $loader)
-    {
-        $this->loader = $loader;
+    $wmi = strtoupper($vehicle['wmi'] ?? '');
+
+    if (isset($manufacturers[$wmi])) {
+        $vehicle['manufacturer'] = $manufacturers[$wmi];
     }
 
-    /**
-     * Decode the World Manufacturer Identifier (WMI).
-     *
-     * Characters 1–3 of the VIN determine the manufacturer.
-     *
-     * @param array $vehicle
-     * @return array
-     */
-    public function decode(array $vehicle): array
-    {
-        $manufacturers = $this->loader->load('manufacturers');
-
-        $wmi = strtoupper($vehicle['wmi'] ?? '');
-
-        if (
-            isset($manufacturers[$wmi]) &&
-            isset($manufacturers[$wmi]['manufacturer'])
-        ) {
-
-            $vehicle['manufacturer'] =
-                $manufacturers[$wmi]['manufacturer'];
-
-        }
-
-        return $vehicle;
-    }
+    return $vehicle;
 }
